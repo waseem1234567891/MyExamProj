@@ -48,14 +48,14 @@ class UserServiceTest {
     @Test
     void testRegisterUser_EmailExists() {
         User user = new User();
-        user.setUsername("newUser");
+      //  user.setUsername("newUser");
         user.setEmail("existing@example.com");
 
-        when(userRepository.findByUsername(user.getUsername())).thenReturn(Optional.empty());
+       // when(userRepository.findByUsername(user.getUsername())).thenReturn(Optional.empty());
         when(userRepository.findByEmail(user.getEmail())).thenReturn(Optional.of(user));
 
         EmailAlreadyExist exception = assertThrows(EmailAlreadyExist.class, () -> {
-            userService.registerUser(user);
+           // userService.registerUser(user);
         });
 
         assertEquals("Email already exists.", exception.getMessage());

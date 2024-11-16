@@ -31,7 +31,7 @@ public class UserController {
     @PostMapping("/register")
     public ResponseEntity<ApiResponse> registerUser(@Valid @RequestBody UserRegistrationRequest userRegistrationRequest, @RequestHeader Map<String,String> header) {
         System.out.println(header);
-        System.out.println("hello");
+        
         User registeredUser = userService.registerUser(userRegistrationRequest);
         ApiResponse response = new ApiResponse("success", "User Registered Successfully!");
         return ResponseEntity.status(HttpStatus.CREATED).body(response);

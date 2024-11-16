@@ -35,7 +35,7 @@ class UserServiceTest {
         User user = new User();
        // user.setUsername("existingUser");
         user.setEmail("test@example.com");
-
+        System.out.println("Test");
        // when(userRepository.findByUsername(user.getUsername())).thenReturn(Optional.of(user));
 
         EmailAlreadyExist exception = assertThrows(EmailAlreadyExist.class, () -> {

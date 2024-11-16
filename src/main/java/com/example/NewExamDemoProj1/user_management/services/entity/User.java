@@ -1,19 +1,22 @@
-package com.example.NewExamDemoProj1.entity;
+package com.example.NewExamDemoProj1.user_management.services.entity;
 
 
 
 
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
+
 
 @Getter
 @Setter
 @Entity
+@Data
 public class User {
 
     @Id
@@ -21,8 +24,10 @@ public class User {
     private Long id;
 
     @NotBlank
-    @Column(unique = true)
-    private String username;
+    private String firstName;
+
+    @NotBlank
+    private String lastName;
 
     @NotBlank
     private String password;

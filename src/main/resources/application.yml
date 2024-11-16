@@ -1,0 +1,13 @@
+server:
+    port: 8081
+spring:
+    application:
+        name: NewExamDemoProj1
+    datasource:
+        password: tumbin
+        url: jdbc:mysql://localhost:3306/mydb
+        username: root
+    jpa:
+        hibernate:
+            ddl-auto: update
+        show-sql: true

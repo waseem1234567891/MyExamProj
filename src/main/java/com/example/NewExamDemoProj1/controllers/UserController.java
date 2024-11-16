@@ -1,17 +1,20 @@
 package com.example.NewExamDemoProj1.controllers;
 
-import com.example.NewExamDemoProj1.entity.User;
-import com.example.NewExamDemoProj1.services.UserService;
+import com.example.NewExamDemoProj1.user_management.services.dto.ApiResponse;
+import com.example.NewExamDemoProj1.user_management.services.dto.ChangePasswordRequest;
+import com.example.NewExamDemoProj1.user_management.services.dto.LoginRequest;
+import com.example.NewExamDemoProj1.user_management.services.dto.UserRegistrationRequest;
+import com.example.NewExamDemoProj1.user_management.services.entity.User;
+import com.example.NewExamDemoProj1.user_management.services.UserService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.Map;
 
-
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/users")
@@ -20,11 +23,40 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @PostMapping("/register")
-    public ResponseEntity<User> registerUser(@RequestBody User user) {
-        User registeredUser = userService.registerUser(user);
-        return ResponseEntity.ok(registeredUser);
+    @GetMapping("/getAllUsers")
+    public List<User> getAllUsers()
+    {
+      return   userService.getAllRegisterUsers();
     }
+    @PostMapping("/register")
+    public ResponseEntity<ApiResponse> registerUser(@Valid @RequestBody UserRegistrationRequest userRegistrationRequest, @RequestHeader Map<String,String> header) {
+        System.out.println(header);
+        System.out.println("hello");
+        User registeredUser = userService.registerUser(userRegistrationRequest);
+        ApiResponse response = new ApiResponse("success", "User Registered Successfully!");
+        return ResponseEntity.status(HttpStatus.CREATED).body(response);
+
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<ApiResponse> loginUser(@Valid @RequestBody LoginRequest loginRequest)
+    {
+     User user=userService.login(loginRequest);
+        System.out.println("hello");
+        ApiResponse response = new ApiResponse("success", "User Successfully logged in!");
+        return ResponseEntity.status(HttpStatus.FOUND).body(response);
+    }
+
+    @PutMapping("/updatepassword")
+
+    public ResponseEntity<ApiResponse> changeUserPassword(@Valid @RequestBody ChangePasswordRequest changePasswordRequest)
+    {
+
+        userService.updatePassword(changePasswordRequest);
+        ApiResponse response=new ApiResponse("success","Password is updated");
+        return ResponseEntity.status(HttpStatus.FOUND).body(response);
+    }
+
 }
 
 

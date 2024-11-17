@@ -1,11 +1,11 @@
 package com.example.NewExamDemoProj1.controllers;
 
-import com.example.NewExamDemoProj1.user_management.services.dto.ApiResponse;
-import com.example.NewExamDemoProj1.user_management.services.dto.ChangePasswordRequest;
-import com.example.NewExamDemoProj1.user_management.services.dto.LoginRequest;
-import com.example.NewExamDemoProj1.user_management.services.dto.UserRegistrationRequest;
-import com.example.NewExamDemoProj1.user_management.services.entity.User;
-import com.example.NewExamDemoProj1.user_management.services.UserService;
+import com.example.NewExamDemoProj1.user_management.dto.ApiResponse;
+import com.example.NewExamDemoProj1.user_management.dto.ChangePasswordRequest;
+import com.example.NewExamDemoProj1.user_management.dto.LoginRequest;
+import com.example.NewExamDemoProj1.user_management.dto.UserRegistrationRequest;
+import com.example.NewExamDemoProj1.user_management.entity.User;
+import com.example.NewExamDemoProj1.services.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

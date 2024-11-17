@@ -1,4 +1,4 @@
-package com.example.NewExamDemoProj1.user_management.services.entity;
+package com.example.NewExamDemoProj1.user_management.entity;
 
 
 

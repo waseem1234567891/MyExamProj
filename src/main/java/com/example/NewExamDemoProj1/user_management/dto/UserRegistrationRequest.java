@@ -1,20 +1,22 @@
-package com.example.NewExamDemoProj1.user_management.services.dto;
+package com.example.NewExamDemoProj1.user_management.dto;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 
-
-
-@AllArgsConstructor
-@NoArgsConstructor
 @Data
-public class LoginRequest {
+@Setter
+@Getter
+public class UserRegistrationRequest {
 
+    @NotBlank(message = "First name cannot be empty")
+    private String firstName;
+    @NotBlank(message = "Last name cannot be empty")
+    private String lastName;
     @Email(message = "Email should be valid")
     @NotBlank(message = "Email is mandatory")
     private String email;

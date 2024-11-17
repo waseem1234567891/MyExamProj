@@ -1,4 +1,4 @@
-package com.example.NewExamDemoProj1.user_management.services.dto;
+package com.example.NewExamDemoProj1.user_management.dto;
 
 
 import lombok.AllArgsConstructor;

@@ -1,13 +1,13 @@
-package com.example.NewExamDemoProj1.user_management.services;
+package com.example.NewExamDemoProj1.services;
 
-import com.example.NewExamDemoProj1.user_management.services.dto.ChangePasswordRequest;
-import com.example.NewExamDemoProj1.user_management.services.dto.LoginRequest;
-import com.example.NewExamDemoProj1.user_management.services.dto.UserRegistrationRequest;
-import com.example.NewExamDemoProj1.user_management.services.entity.User;
-import com.example.NewExamDemoProj1.user_management.services.exceptions.InvalidPasswordException;
-import com.example.NewExamDemoProj1.user_management.services.exceptions.UserNotFoundException;
-import com.example.NewExamDemoProj1.user_management.services.exceptions.EmailAlreadyExist;
-import com.example.NewExamDemoProj1.user_management.services.repository.UserRepository;
+import com.example.NewExamDemoProj1.user_management.dto.ChangePasswordRequest;
+import com.example.NewExamDemoProj1.user_management.dto.LoginRequest;
+import com.example.NewExamDemoProj1.user_management.dto.UserRegistrationRequest;
+import com.example.NewExamDemoProj1.user_management.entity.User;
+import com.example.NewExamDemoProj1.user_management.exceptions.InvalidPasswordException;
+import com.example.NewExamDemoProj1.user_management.exceptions.UserNotFoundException;
+import com.example.NewExamDemoProj1.user_management.exceptions.EmailAlreadyExist;
+import com.example.NewExamDemoProj1.repository.UserRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

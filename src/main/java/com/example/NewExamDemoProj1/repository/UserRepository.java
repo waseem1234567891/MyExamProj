@@ -1,6 +1,6 @@
-package com.example.NewExamDemoProj1.user_management.services.repository;
+package com.example.NewExamDemoProj1.repository;
 
-import com.example.NewExamDemoProj1.user_management.services.entity.User;
+import com.example.NewExamDemoProj1.user_management.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.Optional;
 

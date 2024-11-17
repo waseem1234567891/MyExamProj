@@ -1,7 +1,7 @@
-package com.example.NewExamDemoProj1.user_management.services.exceptions;
+package com.example.NewExamDemoProj1.user_management.exceptions;
 
-import com.example.NewExamDemoProj1.user_management.services.dto.ApiResponse;
-import com.example.NewExamDemoProj1.user_management.services.dto.ErrorResponse;
+import com.example.NewExamDemoProj1.user_management.dto.ApiResponse;
+import com.example.NewExamDemoProj1.user_management.dto.ErrorResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;

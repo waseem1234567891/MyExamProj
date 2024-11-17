@@ -5,10 +5,9 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 
-import com.example.NewExamDemoProj1.user_management.services.entity.User;
-import com.example.NewExamDemoProj1.user_management.services.exceptions.EmailAlreadyExist;
-import com.example.NewExamDemoProj1.user_management.services.repository.UserRepository;
-import com.example.NewExamDemoProj1.user_management.services.UserService;
+import com.example.NewExamDemoProj1.user_management.entity.User;
+import com.example.NewExamDemoProj1.user_management.exceptions.EmailAlreadyExist;
+import com.example.NewExamDemoProj1.repository.UserRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;

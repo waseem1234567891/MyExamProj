@@ -5,7 +5,7 @@ spring:
         name: NewExamDemoProj1
     datasource:
         password: tumbin
-        url: jdbc:mysql://localhost:3306/mydb
+        url: jdbc:mysql://localhost:3306/myexam
         username: root
     jpa:
         hibernate:

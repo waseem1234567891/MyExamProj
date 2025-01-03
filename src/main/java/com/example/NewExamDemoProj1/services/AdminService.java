@@ -21,7 +21,7 @@ public class AdminService {
 
     public AdminUser login_admin(@Valid AdminLoginRequest adminLoginRequest)
     {
-        Optional<AdminUser> optionalAdminUser=adminRepository.findByEmail(adminLoginRequest.getEmail());
+        Optional<AdminUser> optionalAdminUser=adminRepository.findByUserName(adminLoginRequest.getUserName());
         if(optionalAdminUser.isPresent())
         {
             AdminUser adminUser=optionalAdminUser.get();

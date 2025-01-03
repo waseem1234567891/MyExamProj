@@ -11,9 +11,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class AdminLoginRequest {
 
-    @NotBlank(message = "email cannot be empty")
-    @Email(message = "Email should be valid")
-    private String email;
+    @NotBlank(message = "User cannot be empty")
+    private String userName;
 
     @NotBlank(message = "Password cannot be empty")
     private String password;

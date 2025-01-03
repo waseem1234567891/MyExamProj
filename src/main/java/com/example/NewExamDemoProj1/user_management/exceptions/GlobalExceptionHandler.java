@@ -17,19 +17,19 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(EmailAlreadyExist.class)
     public ResponseEntity<ApiResponse> handleUserRegistrationException(EmailAlreadyExist ex) {
-        ApiResponse response= new ApiResponse("failed",ex.getMessage());
+        ApiResponse response= new ApiResponse(true, "failed",ex.getMessage());
         return ResponseEntity.status(HttpStatus.CONFLICT).body(response);
     }
 
     @ExceptionHandler(UserNotFoundException.class)
     public ResponseEntity<ApiResponse> handleUserLoginException(UserNotFoundException ex) {
-        ApiResponse response= new ApiResponse("failed",ex.getMessage());
+        ApiResponse response= new ApiResponse(true, "failed",ex.getMessage());
         return ResponseEntity.status(HttpStatus.CONFLICT).body(response);
     }
 
     @ExceptionHandler(InvalidPasswordException.class)
     public ResponseEntity<ApiResponse> handleInvalidPasswordException(InvalidPasswordException ex) {
-        ApiResponse response= new ApiResponse("failed",ex.getMessage());
+        ApiResponse response= new ApiResponse(true, "failed",ex.getMessage());
         return ResponseEntity.status(HttpStatus.CONFLICT).body(response);
     }
 

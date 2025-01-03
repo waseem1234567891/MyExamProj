@@ -19,7 +19,7 @@ public class AdminUser {
 
     @NotBlank
     @Column(unique = true)
-    private String email;
+    private String userName;
 
     @NotBlank
     private  String password;

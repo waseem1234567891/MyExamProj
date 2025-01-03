@@ -33,7 +33,7 @@ public class UserController {
         System.out.println(header);
         
         User registeredUser = userService.registerUser(userRegistrationRequest);
-        ApiResponse response = new ApiResponse("success", "User Registered Successfully!");
+        ApiResponse response = new ApiResponse(true,"success", "User Registered Successfully!");
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
 
     }
@@ -43,8 +43,8 @@ public class UserController {
     {
      User user=userService.login(loginRequest);
         System.out.println("hello");
-        ApiResponse response = new ApiResponse("success", "User Successfully logged in!");
-        return ResponseEntity.status(HttpStatus.FOUND).body(response);
+        ApiResponse response = new ApiResponse(true,"success", "User Successfully logged in!");
+        return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
     @PutMapping("/updatepassword")
@@ -53,7 +53,7 @@ public class UserController {
     {
 
         userService.updatePassword(changePasswordRequest);
-        ApiResponse response=new ApiResponse("success","Password is updated");
+        ApiResponse response=new ApiResponse(true,"success","Password is updated");
         return ResponseEntity.status(HttpStatus.FOUND).body(response);
     }
 

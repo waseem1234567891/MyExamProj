@@ -68,5 +68,9 @@ throw new UserNotFoundException("User not Found");
         List<User> all = userRepository.findAll();
         return all;
     }
+
+    public Optional<User> getUserById(Long userId) {
+        return userRepository.findById(userId);
+    }
 }
 

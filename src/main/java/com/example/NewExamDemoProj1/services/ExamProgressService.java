@@ -1,11 +1,12 @@
 package com.example.NewExamDemoProj1.services;
 
+import com.example.NewExamDemoProj1.question_management.entity.Exam;
 import com.example.NewExamDemoProj1.question_management.entity.ExamProgress;
 import com.example.NewExamDemoProj1.repository.ExamProgressRepository;
+import com.example.NewExamDemoProj1.user_management.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
 import java.util.Map;
 import java.util.Optional;
 
@@ -13,28 +14,44 @@ import java.util.Optional;
 public class ExamProgressService {
 
     @Autowired
-    private ExamProgressRepository repository;
+    private ExamProgressRepository examProgressRepository;
+    @Autowired
+    private UserService userService;
+    @Autowired
+    private ExamService examService;
 
     public ExamProgress saveProgress(Long userId, Long examId,  Map<Long, String> selectedOptions, int currentPage) {
-        ExamProgress progress = repository.findByUserIdAndExamId(userId, examId)
+        ExamProgress progress = examProgressRepository.findByUserIdAndExamId(userId, examId)
                 .orElse(new ExamProgress());
-
-        progress.setUserId(userId);
-        progress.setExamId(examId);
+        Optional<User> user=userService.getUserById(userId);
+        progress.setUser(user.get());
+        Optional<Exam> exam=examService.displayAnExam(examId);
+        progress.setExam(exam.get());
         progress.setUserAnswers(selectedOptions);
         progress.setCurrentPage(currentPage);
 
 
-        return repository.save(progress);
+        return examProgressRepository.save(progress);
     }
 
     public Optional<ExamProgress> getProgress(Long userId, Long examId) {
-        return repository.findByUserIdAndExamId(userId, examId);
+        return examProgressRepository.findByUserIdAndExamId(userId, examId);
     }
-    public void deleteProgress(Long userId, Long examId) {
-        repository.deleteByUserIdAndExamId(userId, examId); // Delete progress in DB
+    //delete a progress
+    public void deleteProgressByProgressId(Long id) {
+        if(examProgressRepository.existsById(id))
+        {
+            examProgressRepository.deleteById(id);
+        }
+        else {
+            throw new RuntimeException("ExamProgress with ID " + id + " does not exist.");
+        }
     }
 
-   // public void deleteProgress()
+    public Optional<ExamProgress> getProgressById(Long examProgressId) {
+        return examProgressRepository.findById(examProgressId);
+    }
+
+    // public void deleteProgress()
 }
 

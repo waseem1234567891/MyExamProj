@@ -4,7 +4,6 @@ import com.example.NewExamDemoProj1.question_management.dto.ExamProgressDto;
 import com.example.NewExamDemoProj1.question_management.entity.ExamProgress;
 import com.example.NewExamDemoProj1.services.ExamProgressService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,13 +26,13 @@ public class ExamProgressController {
         return progressService.getProgress(userId, examId);
 
     }
-    @DeleteMapping("/exam-progress")
-    public ResponseEntity<Void> deleteProgress(@RequestParam Long userId, @RequestParam Long examId) {
+    @DeleteMapping("/{id}")
+    public String deleteProgress(@PathVariable Long id) {
         try {
-            progressService.deleteProgress(userId, examId); // Service to handle deletion
-            return ResponseEntity.noContent().build();
+            progressService.deleteProgressByProgressId(id); // Service to handle deletion
+            return "ExamProgress with ID " + id + " has been deleted.";
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+            return e.getMessage();
         }
     }
 

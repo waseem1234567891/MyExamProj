@@ -5,6 +5,7 @@ import com.example.NewExamDemoProj1.user_management.entity.User;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -38,5 +39,5 @@ public class ResultRequest {
     private boolean isPassed; // To determine if the user passed or failed.
 
     @Temporal(TemporalType.TIMESTAMP)
-    private java.util.Date attemptDate; // Timestamp for the attempt.
+    private LocalDateTime attemptDate; // Timestamp for the attempt.
 }

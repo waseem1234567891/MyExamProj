@@ -1,5 +1,7 @@
 package com.example.NewExamDemoProj1.question_management.entity;
 
+import com.example.NewExamDemoProj1.user_management.entity.User;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -19,8 +21,16 @@ public class ExamProgress {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Long userId;
-    private Long examId;
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "user_id", nullable = false)
+    @JsonBackReference
+    private User user;
+
+    @OneToOne
+    @JoinColumn(name = "exam_id", referencedColumnName = "id")
+    @JsonBackReference
+    private Exam exam;
+
 
     @ElementCollection
     @CollectionTable(name = "user_answers_progress", joinColumns = @JoinColumn(name = "examprogress_id"))

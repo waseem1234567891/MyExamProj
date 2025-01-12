@@ -46,4 +46,12 @@ public class ExamController {
         Result savedResult = resultService.saveResult(result);
         return ResponseEntity.status(HttpStatus.CREATED).body(savedResult);
     }
+
+    //getting all questions from an exam using exam id
+    @GetMapping("/examallquestions/{id}")
+    public List<Question> getAllQuestionsOfAnExam(@PathVariable Long id)
+    {
+        List<Question> allQuestionsByExamId = examService.getAllQuestionsByExamId(id);
+        return  allQuestionsByExamId;
+    }
 }

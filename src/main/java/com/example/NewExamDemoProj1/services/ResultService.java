@@ -3,24 +3,33 @@ package com.example.NewExamDemoProj1.services;
 
 import com.example.NewExamDemoProj1.question_management.dto.ResultRequest;
 import com.example.NewExamDemoProj1.question_management.entity.Exam;
+import com.example.NewExamDemoProj1.question_management.entity.ExamProgress;
+import com.example.NewExamDemoProj1.question_management.entity.Question;
 import com.example.NewExamDemoProj1.question_management.entity.Result;
 import com.example.NewExamDemoProj1.repository.ResultRepository;
 import com.example.NewExamDemoProj1.user_management.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
 public class ResultService {
 
-    private final ResultRepository resultRepository;
+
 
     @Autowired
     private UserService userService;
     @Autowired
     private ExamService examService;
+    @Autowired
+    private ExamProgressService examProgressService;
+    @Autowired
+    private ResultRepository resultRepository;
 
     @Autowired
     public ResultService(ResultRepository resultRepository) {
@@ -44,18 +53,53 @@ public class ResultService {
         return resultRepository.save(result1);
     }
 
-    // Calculate and set the score for a result
-    public void calculateAndSaveResult(Result result) {
-//        int correctAnswers = result.getCorrectAnswers();
-//        int totalQuestions = result.getTotalQuestions();
-//        int score = (int) (((double) correctAnswers / totalQuestions) * 100);  // Calculate score
-//
-//        result.setScore(score);
-//        result.setPassed(score >= 50);  // Example: passing score is 50%
-       // saveResult(result);
+
+    public Long calculateAndSaveResult(Long examProgressId)
+    {
+       ExamProgress examProgress= examProgressService.getProgressById(examProgressId).orElseThrow(()->new RuntimeException("Exam Progress not found"));
+
+       Long examId=(examProgress.getExam()).getId();
+       List<Question> questions=examService.getAllQuestionsByExamId(examId);
+       int totalQuestions= questions.size();
+       int correctAnswer=0;
+       Map<Long, String> userAllAnswers=examProgress.getUserAnswers();
+        // Compare user answers with correct answers
+       for (Question question:questions)
+       {
+           String userAnswer=examProgress.getUserAnswers().get(question.getId());
+           if(userAnswer!=null&&userAnswer.equals(question.getCorrect_option()))
+           {
+               correctAnswer++;
+           }
+       }
+        // Calculate score (optional: as a percentage)
+        double score =  ((double) correctAnswer / totalQuestions )* 100;
+       double passThreshold = 50; // Define a pass threshold (e.g., 50%)
+        boolean isPassed = score >= passThreshold;
+        Result result=new Result();
+       result.setTotalQuestions(totalQuestions);
+       result.setScore(score);
+       result.setUser(examProgress.getUser());
+       result.setCorrectAnswers(correctAnswer);
+       result.setAttemptDate(LocalDateTime.now());
+       result.setExam(examProgress.getExam());
+       result.setPassed(isPassed);
+       result.setUserAnswers(new HashMap<>(userAllAnswers));
+        Result save = resultRepository.save(result);
+        return save.getId();
     }
 
     public List<Result> getAllResults() {
        return resultRepository.findAll();
+    }
+
+    public Optional<Result> getResult(Long id) {
+
+            return resultRepository.findById(id);
+
+    }
+  //counting average
+    public Double getAverageScoreByExamId(Long examId) {
+        return resultRepository.findAverageScoreByExamId(examId);
     }
 }

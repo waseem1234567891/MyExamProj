@@ -9,7 +9,7 @@ import java.util.Optional;
 public interface ExamProgressRepository extends JpaRepository<ExamProgress, Long> {
     Optional<ExamProgress> findByUserIdAndExamId(Long userId, Long examId);
 
-    void deleteByUserIdAndExamId(Long userId, Long examId);
+
 
 }
 

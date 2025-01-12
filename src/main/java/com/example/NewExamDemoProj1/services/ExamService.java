@@ -49,4 +49,10 @@ public class ExamService {
         exam.setQuestions(questions);
         examRepository.save(exam);
     }
+
+    public List<Question> getAllQuestionsByExamId(Long id) {
+        Optional<Exam> byId = examRepository.findById(id);
+        Exam exam = byId.get();
+       return exam.getQuestions();
+    }
 }
